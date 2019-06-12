@@ -20,7 +20,7 @@
         </button>
     </div>
     <div class="menu-item">
-        <button class="mdc-fab" aria-label="Favorite" onclick="location.href='<?= Yii::$app->homeUrl."site/albums" ?>';">
+        <button class="mdc-fab" aria-label="Favorite" onclick="location.href='<?= Yii::$app->homeUrl."album" ?>';">
             <span class="mdc-fab__icon material-icons">collections_bookmark</span>
         </button>
     </div>

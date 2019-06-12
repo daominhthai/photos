@@ -22,6 +22,12 @@ class ImageController extends \yii\web\Controller
         return $this->goHome();
     }
     
+    public function actionDownload($id){
+        $data = Image::findOne($id);
+        header('Content-Type:'.pathinfo($data->path_image, PATHINFO_EXTENSION));
+        header('Content-Disposition: attachment; filename='.$data->image);
+        return readfile($data->path_image);
+    } 
     // public function actionDelete(){
     //     $request = Yii::$app->request;
     //     $id = $request->get("id");

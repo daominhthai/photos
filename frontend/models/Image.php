@@ -53,7 +53,7 @@ class Image extends \yii\db\ActiveRecord
         return [
             'image_id' => 'Image ID',
             'user_id' => 'User ID',
-            'image' => 'Image',
+            'image' => 'Tải lên',
             'path_image' => 'Path Image',
             'description' => 'Description',
             'location' => 'Location',
@@ -89,11 +89,13 @@ class Image extends \yii\db\ActiveRecord
     }
 
     public function deleteImage($id){
-        $delete = Image::findOne($id);
-        echo '<pre>';
-        print_r($delete);
-        die();
-        $detele->deleted = 1;
-        $detele->update();
+        $data = Image::findOne($id);
+        // echo '<pre>';
+        // print_r($delete);
+        // die();
+        $data->deleted =1;
+        $data->update();
     }
 }
+
+?>

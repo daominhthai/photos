@@ -108,8 +108,8 @@ use yii\helpers\Url;
                     <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">tune</a>
                     <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User">zoom_in</a>
                     <a href="#" class="material-icons mdc-top-app-bar__navigation-icon " aria-label="Create">infor</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload" onclick="myFunctionLike()">star_border</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionDelete()">delete_outline</a>
+                    <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">star_border</a>
+                    <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionDelete()">delete_outline</a>
                     <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction()">more_vert</a>
             </section>
         </div>
@@ -120,9 +120,11 @@ use yii\helpers\Url;
             <li class="mdc-list-item" role="menuitem">
                 <span class="mdc-list-item__text">Trình chiếu</span>
             </li>
-            <li class="mdc-list-item" role="menuitem">
-                <span class="mdc-list-item__text">Tải xuống</span>
-            </li>
+            <a href="<?php echo Yii::$app->homeUrl."image/download?id=".$data["image_id"]?>" style="text-decoration: none; color: black">
+                <li class="mdc-list-item" role="menuitem">
+                    <span class="mdc-list-item__text">Tải xuống</span>
+                </li>
+            </a>
             <li class="mdc-list-item" role="menuitem">
                 <span class="mdc-list-item__text">Xoay</span>
             </li>
@@ -151,7 +153,7 @@ use yii\helpers\Url;
     </ul>
     </div>
     <!-- menu thêm vào yêu thích -->
-    <div class="mdc-menu mdc-menu-like mdc-menu-surface">
+ <!--    <div class="mdc-menu mdc-menu-like mdc-menu-surface">
         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
         <li>
             <span class="mdc-typography mdc-typography--subtitle1" style="padding-left: 15px;">Đã thêm vào album ảnh yêu thích nhé !</span>
@@ -161,7 +163,7 @@ use yii\helpers\Url;
             <button class="mdc-button mdc-button--raised" onclick="window.location.href='#'">Đến album ảnh yêu thích</button>
         </li>
     </ul>
-    </div>
+    </div> -->
 
 
     <img class="img-center" src="<?php echo Yii::$app->homeUrl."frontend/web/".$data["path_image"]?>">
@@ -200,16 +202,16 @@ use yii\helpers\Url;
         menudelete.close = !menudelete.close;
     }
 
-    //menu yêu thích
-    const menulike = new MDCMenu(document.querySelector('.mdc-menu-like'));
-    menulike.open = false;
-    menulike.setAbsolutePosition(900, 50);
-    function myFunctionLike(){
-        menulike.open = !menulike.open;
-    }
-    function functionCloseLike(){
-        menulike.close = !menulike.close;
-    }
+    // //menu yêu thích
+    // const menulike = new MDCMenu(document.querySelector('.mdc-menu-like'));
+    // menulike.open = false;
+    // menulike.setAbsolutePosition(900, 50);
+    // function myFunctionLike(){
+    //     menulike.open = !menulike.open;
+    // }
+    // function functionCloseLike(){
+    //     menulike.close = !menulike.close;
+    // }
 </script>
 <?php $this->endBody() ?>
 </body>

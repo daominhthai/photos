@@ -33,11 +33,10 @@ use app\widgets\menuhideWidget;
 <div class="mdc-drawer-scrim "></div>
 <div class="mdc-drawer-app-content">
 
-    <?= headermainWidget::widget(); ?>
 
     <?= categoryWidget::widget(); ?>
     
-    <main class="main-content" id="main-content">
+    <main id="main-content">
 
         <?=$content?>
 

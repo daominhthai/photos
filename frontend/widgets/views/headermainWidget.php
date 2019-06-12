@@ -31,11 +31,14 @@ use yii\helpers\Html;
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
             <a class="material-icons mdc-top-app-bar__navigation-icon" aria-label="Create" onclick="myFunction()">add_box</a>
+
             <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-            <?= $form->field($model, 'image[]')->fileInput(['multiple' => true, 'accept' => 'image/*',
+
+                <?= $form->field($model, 'image[]')->fileInput(['multiple' => true, 'accept' => 'image/*',
                 'onchange' => 'this.form.submit()', 'style' => 'display:none']) ?>
+
             <?php ActiveForm::end(); ?>
-            <!--            <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload" id="btnFileUpload">cloud_upload</a>-->
+
             <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction2()">account_circle</a>
         </section>
     </div>
