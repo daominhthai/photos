@@ -13,7 +13,7 @@
                 <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">tune</a>
                 <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User">zoom_in</a>
                 <a href="#" class="material-icons mdc-top-app-bar__navigation-icon " aria-label="Create">infor</a>
-                <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">star_border</a>
+                <a onclick="window.location.href='<?php echo Yii::$app->homeUrl."site/wistlist?id=".$data["image_id"]?>'" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">star_border</a>
                 <a href="<?php echo Yii::$app->homeUrl."frontend/web/image/delete?id=".$data["image_id"]?>" class="material-icons mdc-top-app-bar__action-item" aria-label="User" >delete_outline</a>
                 <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction()">more_vert</a>
         </section>

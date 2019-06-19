@@ -96,6 +96,34 @@ class Image extends \yii\db\ActiveRecord
         $data->deleted =1;
         $data->update();
     }
+
+    public function deleteAllTrash(){
+
+        Image::deleteAll([
+            'user_id'=>Yii::$app->user->id,
+            'deleted'=>1
+        ]);
+
+        // $models = Image::find()
+        // ->where([
+        //     'user_id'=>Yii::$app->user->id,
+        //     'deleted'=>1
+        // ])
+        // ->all();
+        // foreach ($models as $model) {
+        //      $model->delete();
+        //     }
+    }
+    public function deleteSelectTrash($id){
+        $data = Image::findOne($id);
+        $data->delete();
+    }
+
+    public function redeleteTrash($id){    
+        $data = Image::findOne($id);   
+        $data->deleted =0;
+        $data->update();
+    }
 }
 
 ?>

@@ -56,11 +56,11 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fullname' => 'Fullname',
-            'username' => 'Username',
+            'fullname' => 'Họ và tên',
+            'username' => 'Tên đăng nhập',
             'email' => 'Email',
             'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
+            'password_hash' => 'Mật khẩu',
             'password_reset_token' => 'Password Reset Token',
             'status' => 'Status',
             'created_at' => 'Created At',

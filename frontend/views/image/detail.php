@@ -14,7 +14,7 @@ use yii\helpers\Url;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Ảnh</title>
     <?php $this->head() ?>
 
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@ use yii\helpers\Url;
              margin-left: 0 auto;
              margin-right: 0 auto;
         } */
-        .img-center{
+        /* .img-center{
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -48,7 +48,7 @@ use yii\helpers\Url;
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
-        }
+        } */
         .mdc-drawer-app-content {
             flex: auto;
             overflow: auto;
@@ -66,6 +66,89 @@ use yii\helpers\Url;
         .mdc-drawer{
             width: 260px;
         }
+* {box-sizing: border-box}
+.mySlides {
+    display: none;
+}
+img {vertical-align: middle; display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+            width: auto;
+            height: auto;
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);}
+
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next, {font-size: 11px}
+}
     </style>
 </head>
 <body>
@@ -79,15 +162,15 @@ use yii\helpers\Url;
             </section>
         </div>
         <div class="mdc-layout-grid">
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell--span-4"><?php echo "Tên hình:" ?></div>
-            <div class="mdc-layout-grid__cell--span-8"><?php echo $data["image"]; ?></div>
-            <div class="mdc-layout-grid__cell--span-6"><?php echo "Ngày, giờ tải lên:"?></div>
-            <div class="mdc-layout-grid__cell--span-6"><?php echo $data["date_create"]; ?></div>
-          </div>
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-4"><b><?php echo "Tên hình:" ?></b></div><br>
+                <div class="mdc-layout-grid__cell--span-8"><?php echo $data["image"]; ?></div>
+                <div class="mdc-layout-grid__cell--span-6"><b><?php echo "Ngày, giờ tải lên:"?></b></div><br>
+                <div class="mdc-layout-grid__cell--span-6"><?php echo $data["date_create"]; ?></div>
+            </div>
         </div>
-        
-        
+
+
     </header>
 </aside>
 
@@ -95,7 +178,7 @@ use yii\helpers\Url;
 
     <header class="mdc-top-app-bar app-bar header-detail" id="app-bar">
         <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">              
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                 <a href="<?= Yii::$app->homeUrl?>" class="material-icons mdc-top-app-bar__action-item" aria-label="Backspace">keyboard_backspace</a>
             </section>
 
@@ -103,18 +186,39 @@ use yii\helpers\Url;
 
             </section>
 
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">  
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Create">share_outline</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">tune</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User">zoom_in</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__navigation-icon " aria-label="Create">infor</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">star_border</a>
-                    <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionDelete()">delete_outline</a>
-                    <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction()">more_vert</a>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <a class="material-icons mdc-top-app-bar__action-item" aria-label="Create">share_outline</a>
+                <a class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">tune</a>
+                <a class="material-icons mdc-top-app-bar__action-item" aria-label="User">zoom_in</a>
+                <a class="material-icons mdc-top-app-bar__navigation-icon " aria-label="Create">infor</a>
+<!--                <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload">star_border</a>-->
+
+                <button id="add-to-favorites wist"
+                        onclick="window.location.href='<?php echo Yii::$app->homeUrl . "site/wistlist?id=" . $data["image_id"] ?>'"
+                        class="mdc-icon-button wist"
+                        aria-label="Add to favorites"
+                        aria-hidden="true"
+                        aria-pressed="false">
+                    <?php
+                    if ($data['wistlist'] == 1) {
+                        ?>
+                        <i name = "name" class="material-icons mdc-icon-button__icon">star_rate</i>
+                        <?php
+                    } else {
+                        ?>
+                        <i name = "name" class="material-icons mdc-icon-button__icon">star_border</i>
+                        <?php
+                    }
+                    ?>
+
+                </button>
+
+                <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionDelete()">delete_outline</a>
+                <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction()">more_vert</a>
             </section>
         </div>
     </header>
-<!--menu-->
+    <!--menu-->
     <div class="mdc-menu mdc-menu-surface">
         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
             <li class="mdc-list-item" role="menuitem">
@@ -135,38 +239,41 @@ use yii\helpers\Url;
                 <span class="mdc-list-item__text">Thêm vào album được chia sẽ</span>
             </li>
             <li class="mdc-list-item" role="menuitem">
-                <span class="mdc-list-item__text">Lưu trữ</span>
+                <span class="mdc-list-item__text">Luu trữ</span>
             </li>
         </ul>
     </div>
-    
+
     <!-- menu delete -->
     <div class="mdc-menu mdc-menu-delete mdc-menu-surface">
         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-        <li>
-            <span class="mdc-typography mdc-typography--subtitle1" style="padding-left: 15px;">Bạn có muốn xóa hình ảnh này?</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem">
-            <button class="mdc-button" onclick="functionHuyDelete()">Hủy</button>
-            <button class="mdc-button mdc-button--raised" onclick="window.location.href='<?php echo Yii::$app->homeUrl."image/delete?id=".$data["image_id"]?>'">Chuyển vào thùng rác</button>
-        </li>
-    </ul>
+            <li>
+                <span class="mdc-typography mdc-typography--subtitle1" style="padding-left: 15px;">Bạn có muốn xóa hình ảnh này?</span>
+            </li>
+            <li class="mdc-list-item" role="menuitem">
+                <button class="mdc-button" onclick="functionHuyDelete()">Hủy</button>
+                <button class="mdc-button mdc-button--raised" onclick="window.location.href='<?php echo Yii::$app->homeUrl."image/delete?id=".$data["image_id"]?>'">Chuyển vào thùng rác</button>
+            </li>
+        </ul>
     </div>
-    <!-- menu thêm vào yêu thích -->
- <!--    <div class="mdc-menu mdc-menu-like mdc-menu-surface">
-        <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-        <li>
-            <span class="mdc-typography mdc-typography--subtitle1" style="padding-left: 15px;">Đã thêm vào album ảnh yêu thích nhé !</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem">
-            <button class="mdc-button" onclick="functionCloseLike()">Đóng</button>
-            <button class="mdc-button mdc-button--raised" onclick="window.location.href='#'">Đến album ảnh yêu thích</button>
-        </li>
-    </ul>
-    </div> -->
 
+<div class="slideshow-container">
 
-    <img class="img-center" src="<?php echo Yii::$app->homeUrl."frontend/web/".$data["path_image"]?>">
+    <div class="mySlides fade">
+        <img src="<?php echo Yii::$app->homeUrl."frontend/web/".$data["path_image"]?>">
+    </div>
+
+    <?php foreach ($data2 as $key => $value): ?>
+
+        <div class="mySlides fade">
+            <img src="<?php echo Yii::$app->homeUrl."frontend/web/".$value["path_image"]?>">
+        </div>
+
+    <?php endforeach ?>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div> 
 
 </div>
 
@@ -180,10 +287,7 @@ use yii\helpers\Url;
     topAppBar.listen('MDCTopAppBar:nav', () => {
         drawer.open = !drawer.open;
     });
-    function close() {
-        alert("okok");
-    }
-        //menu header
+    //menu header
     const MDCMenu = mdc.menu.MDCMenu;
     const menu = new MDCMenu(document.querySelector('.mdc-menu'));
     menu.open = false;
@@ -202,16 +306,34 @@ use yii\helpers\Url;
         menudelete.close = !menudelete.close;
     }
 
-    // //menu yêu thích
-    // const menulike = new MDCMenu(document.querySelector('.mdc-menu-like'));
-    // menulike.open = false;
-    // menulike.setAbsolutePosition(900, 50);
-    // function myFunctionLike(){
-    //     menulike.open = !menulike.open;
-    // }
-    // function functionCloseLike(){
-    //     menulike.close = !menulike.close;
-    // }
+    //slide
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+
 </script>
 <?php $this->endBody() ?>
 </body>

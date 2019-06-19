@@ -23,19 +23,19 @@ class SignupForm extends Model
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'required','message'=>'Tên tài khoản không được bỏ trống'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Tên tài khoản đã tồn tại.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
-            ['email', 'required'],
+            ['email', 'required','message'=>'Địa chỉ email không được bỏ trống'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Địa chỉ email đã tồn tại.'],
 
             ['fullname','string', 'max' => 255],
 
-            ['password', 'required'],
+            ['password', 'required','message'=>'Mật khẩu không được bỏ trống'],
             ['password', 'string', 'min' => 6],
         ];
     }

@@ -1,13 +1,13 @@
 <?php
 
 use app\widgets\Alert;
+use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use app\widgets\categoryWidget;
 use app\widgets\contentWidget;
 use app\widgets\headermainWidget;
 use app\widgets\menuhideWidget;
-
 ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -23,6 +23,7 @@ use app\widgets\menuhideWidget;
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="<?php echo Yii::$app->homeUrl?>css/style.css">
+    <link rel="stylesheet" href="<?php echo Yii::$app->homeUrl?>js/fun.js">
 
 </head>
 <body>

@@ -47,6 +47,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'login'=>'site/login',
+                'signup'=>'site/signup',
                 ''=>'site/index'
             ],
         ],

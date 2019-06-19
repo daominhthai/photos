@@ -104,40 +104,33 @@ use yii\widgets\ActiveForm;
 </head>
 <body>
 <?php $this->beginBody() ?>
-   <?php $form = ActiveForm::begin(['action' => 'trash/deleteselect']); ?> 
+   <?php $form = ActiveForm::begin(); ?> 
 <header class="mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
     <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <a href="<?= Yii::$app->homeUrl ?>" class="demo-menu material-icons mdc-top-app-bar__navigation-icon">keyboard_backspace</a>
-            <span class="mdc-top-app-bar__title">Thùng rác</span>  
+            <span class="mdc-top-app-bar__title">Lưu trữ</span>  
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-content">
     
             
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">  
-
-            <button id="add-to-favorites wist"
-                    type="submit"
-                    name="history"
-                    class="mdc-icon-button wist"
-                    aria-label="Add to favorites"
-                    aria-hidden="true"
-                    aria-pressed="false">
-                <i name="name" class="material-icons mdc-icon-button__icon">history</i>
-            </button>
-           <!--  <a class="material-icons mdc-top-app-bar__action-item" aria-label="ReDelete" name="history" onchage="this.form.submit()" >history</a> -->
-            <a class="material-icons mdc-top-app-bar__action-item" aria-label="Delete_forever" onclick="myFunctionDelete()">delete_forever</a>
-            <a class="material-icons mdc-top-app-bar__action-item" aria-label="Delete_forever" onclick="myFunctionClear()">clear</a>
+            <!-- <a class="material-icons mdc-top-app-bar__action-item" aria-label="Delete_forever" onclick="myFunctionDelete()">delete_forever</a> -->
+            <button class="mdc-button mdc-button--raised" style="color: white; background-color: #651fff">Thêm ảnh</button>
         </section>
     </div>
 </header>
 
 <div class="content">
     <div class="row">    
-        <?php foreach ($trash as $key => $value): ?>
-
+        <?php foreach ($archive as $key => $value): ?>
             <div class="column " style="padding: 5px">
+                <span class="mdc-typography--subtitle2">
+                    <?php
+                        echo $value["date_create"]." ".$value["location"];
+                    ?>
+                </span>
                     <div class="container">
                         <img class="image" src="<?php echo Yii::$app->homeUrl."frontend/web/".$value["path_image"]?>">
                         <div class="overlay">
@@ -165,56 +158,9 @@ use yii\widgets\ActiveForm;
     </div>   
 </div>
 
-<div class="mdc-menu mdc-menu-delete mdc-menu-surface">
-    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-        <li style="padding-top: 10px;padding-left: 10px;padding-right: 20px;">
-            <span class="mdc-typography mdc-typography--subtitle1" style="padding-left: 15px;">Bạn muốn xóa vĩnh viễn ảnh này?</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem" style="padding-right: 20px;padding-top: 25px;padding-left: 130px;padding-bottom: 10px;padding-bottom: 10px;">
-            <button class="mdc-button" onclick="functionHuyDelete()">Hủy</button>
-
-    
-                <button class="mdc-button mdc-button--raised" type="submit" name="submit">Xóa</button>
-             <?php ActiveForm::end(); ?>
-        </li>
-    </ul>
-</div>
-
-<div class="mdc-menu mdc-menu-clear mdc-menu-surface">
-    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-        <li style="padding-right: 20px;padding-top: 10px;padding-left: 10px;">
-            <span class="mdc-typography mdc-typography--subtitle1" style="padding-left: 15px;">Bạn muốn xóa sạch thùng rác?</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem" style="padding-right: 20px;padding-top: 25px;padding-left: 120px;padding-bottom: 10px;">
-            <button class="mdc-button" onclick="functionHuyClear()">Hủy</button>
-            <button class="mdc-button mdc-button--raised" onclick="window.location.href='<?php echo Yii::$app->homeUrl."trash/deleteall"?>'">Xóa</button>
-        </li>
-    </ul>
-</div>
 
 
 <script>
-    const MDCMenu = mdc.menu.MDCMenu;
-    const menudelete = new MDCMenu(document.querySelector('.mdc-menu-delete'));
-    menudelete.open = false;
-    menudelete.setAbsolutePosition(1300, 50);
-    function myFunctionDelete(){
-        menudelete.open = !menudelete.open;
-    }
-    function functionHuyDelete(){
-        menudelete.close = !menudelete.close;
-    }
-
-    const menuclear = new MDCMenu(document.querySelector('.mdc-menu-clear'));
-    menuclear.open = false;
-    menuclear.setAbsolutePosition(1300, 50);
-    function myFunctionClear(){
-        menuclear.open = !menuclear.open;
-    }
-    function functionHuyClear(){
-        menuclear.close = !menuclear.close;
-    }
- 
 </script>
 <?php $this->endBody() ?>
 </body>

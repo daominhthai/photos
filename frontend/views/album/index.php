@@ -135,7 +135,7 @@ use yii\helpers\Html;
 
             <?php ActiveForm::end(); ?>
 
-            <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction2()">account_circle</a>
+            <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction2()">account_circle</a>
         </section>
     </div>
 </header>
@@ -144,7 +144,7 @@ use yii\helpers\Html;
     <span class="mdc-typography mdc-typography--heading6" style="padding-left: 10px;color: blue"><b>ALBUM</b></span>
     <div class="row">
         <div class="column">
-            <a href="#" style="text-decoration: none;color: black">
+            <a href="<?php echo Yii::$app->homeUrl.'album/addnew'?>" style="text-decoration: none;color: black">
                 <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/add.png"?>" class="image">
                 <span class="mdc-typography--subtitle2"><b>Tạo album</b></span>
             </a>
@@ -153,7 +153,7 @@ use yii\helpers\Html;
         foreach ($albums as $key =>$value) {
             ?>
             <div class="column " style="padding: 5px">
-                <a href="#" style="text-decoration: none;color: black;">
+                <a href="<?php echo Yii::$app->homeUrl.'album/wistlist'?>" style="text-decoration: none;color: black;">
                     <div class="container">
                         <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/5aeb1f62f6cd496dc81c07d58b82f143.jpg"?>" class="image">
                         <div class="overlay">
@@ -169,6 +169,35 @@ use yii\helpers\Html;
         ?>
     </div>
 </div>
+<!-- menu header -->
+<div class="mdc-menu mdc-menu-1 mdc-menu-surface">
+    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+        <li>
+            <span class="mdc-typography mdc-typography--subtitle2" style="padding-left: 15px;">TẠO MỚI</span>
+        </li>
+        <li class="mdc-list-item" role="menuitem" onclick="window.location.href='<?php echo Yii::$app->homeUrl.'album/addnew'?>'">
+            <div class="material-icons" style="color: blue">collections</div>
+            <span class="mdc-list-item__text" style="padding-left: 15px;">Album</span>
+        </li>
+        <li class="mdc-list-item" role="menuitem">
+            <div class="material-icons" style="color: blue">group</div>
+            <span class="mdc-list-item__text" style="padding-left: 15px;">Album được chia sẻ</span>
+        </li>
+        <li class="mdc-list-item" role="menuitem">
+            <div class="material-icons" style="color: blue">movie</div>
+            <span class="mdc-list-item__text" style="padding-left: 15px;">Phim</span>
+        </li>
+        <li class="mdc-list-item" role="menuitem">
+            <div class="material-icons" style="color: blue">filter_none</div>
+            <span class="mdc-list-item__text" style="padding-left: 15px;">Hoạt ảnh</span>
+        </li>
+        <li class="mdc-list-item" role="menuitem">
+            <div class="material-icons" style="color: blue">web</div>
+            <span class="mdc-list-item__text" style="padding-left: 15px;">Ảnh ghép</span>
+        </li>
+    </ul>
+</div>
+
 <!-- menu album -->
 <div class="mdc-menu mdc-menu-album mdc-menu-surface">
     <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
@@ -184,9 +213,18 @@ use yii\helpers\Html;
     const MDCMenu = mdc.menu.MDCMenu;
     const menualbum = new MDCMenu(document.querySelector('.mdc-menu-album'));
     menualbum.open = false;
-    menualbum.setAbsolutePosition(1330, 50);
+    menualbum.setAbsolutePosition(680, 125);
     function myFunctionAlbum(){
         menualbum.open = !menualbum.open;
+    }
+//menu header
+    const menu = new MDCMenu(document.querySelector('.mdc-menu-1'));
+    menu.setFixedPosition(true);
+    menu.hoistMenuToBody(); // Not required if the menu is already positioned on the body
+    menu.setAbsolutePosition(1000, 50); //tạm thời set cứng
+    menu.open = false;
+    function myFunction() {
+        menu.open = !menu.open;
     }
 </script>
 </body>

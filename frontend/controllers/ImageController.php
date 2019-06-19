@@ -11,7 +11,9 @@ class ImageController extends \yii\web\Controller
     {
         $data = new Image();
         $data = $data->getOneImage($id);
-        return $this->renderPartial('detail',['data'=>$data]);
+        $user_id = Yii::$app->user->id;
+        $data2 = Image::find()->where('image_id!=:id AND user_id=:user_id',['id'=>$id,'user_id'=>$user_id])->all();
+        return $this->renderPartial('detail',['data'=>$data,'data2'=>$data2]);
     }
     public function actionDelete($id){
         $data = new Image();

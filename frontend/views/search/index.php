@@ -83,10 +83,11 @@ use app\widgets\headerdetailWidget;
 <div class="mdc-elevation--z4">
     <ul class="mdc-list">
         <?php foreach ($albums as $key => $value): ?>
+            <a href="<?php echo Yii::$app->homeUrl.'album/wistlist'?>" style="text-decoration: none">
             <li class="mdc-list-item" tabindex="0">
             <span class="mdc-list-item__graphic material-icons">star_border</span>
             <?php echo $value["title"] ?>
-        </li>
+        </li></a>
         <?php endforeach ?>  
     </ul>
 </div>
