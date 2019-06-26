@@ -9,15 +9,11 @@ use Yii;
  *
  * @property int $album_id
  * @property int $user_id
- * @property string $title
- * @property string $album_image
  * @property int $deleted
  * @property string $date_create
  * @property string $date_update
- * @property int $status
  *
- * @property User $user
- * @property AlbumImage[] $albumImages
+ * @property AlbumDetail $albumDetail
  */
 class Album extends \yii\db\ActiveRecord
 {
@@ -35,12 +31,9 @@ class Album extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['album_id', 'user_id', 'date_create', 'date_update'], 'required'],
-            [['album_id', 'user_id', 'deleted', 'status'], 'integer'],
+            [['user_id', 'date_create', 'date_update'], 'required'],
+            [['user_id', 'deleted'], 'integer'],
             [['date_create', 'date_update'], 'safe'],
-            [['title', 'album_image'], 'string', 'max' => 255],
-            [['album_id'], 'unique'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -52,29 +45,17 @@ class Album extends \yii\db\ActiveRecord
         return [
             'album_id' => 'Album ID',
             'user_id' => 'User ID',
-            'title' => 'Title',
-            'album_image' => 'Album Image',
             'deleted' => 'Deleted',
             'date_create' => 'Date Create',
             'date_update' => 'Date Update',
-            'status' => 'Status',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getAlbumDetail()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(AlbumDetail::className(), ['detail_id' => 'album_id']);
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAlbumImages()
-    {
-        return $this->hasMany(AlbumImage::className(), ['album_id' => 'album_id']);
-    }
-
 }

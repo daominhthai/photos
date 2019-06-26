@@ -33,17 +33,55 @@ class AlbumController extends \yii\web\Controller
             }
             return $this->redirect(Yii::$app->homeUrl);
         } else {
-            return $this->render('index', ['albums' => $data, 'model' => $model]);
+            return $this->render('index', [
+                'albums' => $data,
+                'model' => $model
+            ]);
         }
     }
 
-    public function actionAddnew(){
-        $data = Image::find()
-            ->where(['user_id'=>Yii::$app->user->id,'deleted'=>0])
-            ->all();
-        return $this->renderPartial('addnew',[
-            'image'=>$data,
-        ]);
+    public function actionAddnew()
+    {
+//        $model = Image::find()
+//            ->where(['user_id' => Yii::$app->user->id, 'deleted' => 0])
+//            ->all();
+//        return $this->renderPartial('addnew', [
+//            'image' => $model
+//        ]);
+          //  add new album
+        $model = new Album();
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $date = date('Y-m-d H:i:s');
+        $username = Yii::$app->user->id;
+        $model->user_id = $username;
+        $model->date_create = $date;
+        $model->date_update = $date;
+
+        Yii::$app->db->createCommand()->insert('album', ['user_id' => $username
+            ,'date_create' => $date
+            ,'date_update' => $date])->execute();
+
+            return $this->renderPartial('add', [
+                'image' => $model
+            ]);
+    }
+
+    public function actionAdd()
+    {
+        $data = Album::find()->all();
+        if (isset($_POST['submit'])) {
+            $tieude = $_POST['tieude'];
+            $image = $_POST['checkimage'];
+            $albumid = $_POST['albumid'];
+            foreach ($image as $item) {
+                print_r($item);
+                echo '<pre>';
+            }
+            print_r($albumid);
+            echo '<pre>';
+            print_r($tieude);
+            die();
+        }
     }
 
     public function actionWistlist(){

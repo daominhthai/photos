@@ -124,6 +124,30 @@ class Image extends \yii\db\ActiveRecord
         $data->deleted =0;
         $data->update();
     }
+
+    public function addArchive($id){
+        $data = Image::findOne($id);
+        $data->deleted =2;
+        $data->update();
+    }
+
+    public function historyArchive($id){
+        $data = Image::findOne($id);
+        $data->deleted =0;
+        $data->update();
+    }
+
+    public function wistlist($id){
+        $wist = Image::findOne($id);
+        if ($wist->wistlist ==0){
+            $wist->wistlist = 1;
+            $wist->update();
+        }
+        else{
+            $wist->wistlist = 0;
+            $wist->update();
+        }
+    }
 }
 
 ?>

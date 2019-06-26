@@ -79,6 +79,18 @@ use yii\helpers\Html;
     .container:hover .overlay {
         opacity: 1;
     }
+
+    .bottom-left {
+          position: absolute;
+          bottom: 8px;
+          left: 16px;
+          font-size: 20px;
+          color: white;
+        }
+        :root {
+            --mdc-theme-primary: blue;
+            --mdc-theme-secondary: blue;
+        }
 </style>
 <!--style="overflow-x: hidden;"-->
 <body >
@@ -119,6 +131,51 @@ use yii\helpers\Html;
             <?php ActiveForm::end(); ?>
 
             <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction2()">account_circle</a>
+        </section>
+    </div>
+</header>
+<!-- menu click checkbox -->
+<header class="mdc-top-app-bar mdc-top-app-bar--fixed" id="menu-box" style="display: none;background-color: black">
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <a class="demo-menu material-icons mdc-top-app-bar__navigation-icon" onclick="toggleMenu()">close</a>
+            <span class="mdc-top-app-bar__title">1 ảnh được chọn</span>  
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-content">
+    
+            
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">  
+            <!-- <a class="material-icons mdc-top-app-bar__action-item" aria-label="Delete_forever" onclick="myFunctionDelete()">delete_forever</a> -->
+            <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionDelete()">delete_outline</a>
+            <button id="add-to-favorites wist"
+                    type="submit"
+                    name="history"
+                    class="mdc-icon-button wist"
+                    aria-label="Add to favorites"
+                    aria-hidden="true"
+                    aria-pressed="false">
+                <i name="name" class="material-icons mdc-icon-button__icon">history</i>
+            </button>
+            <button id="add-to-favorites wist"
+                    type="submit"
+                    name="download"
+                    class="mdc-icon-button wist"
+                    aria-label="Add to favorites"
+                    aria-hidden="true"
+                    aria-pressed="false">
+                <i name="name" class="material-icons mdc-icon-button__icon">get_app</i>
+            </button>
+            <button id="add-to-favorites wist"
+                    type="submit"
+                    name="wistlist"
+                    class="mdc-icon-button wist"
+                    aria-label="Add to favorites"
+                    aria-hidden="true"
+                    aria-pressed="false">
+                <i name="name" class="material-icons mdc-icon-button__icon">star_border</i>
+            </button>
+            <!-- <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction()">more_vert</a> -->
         </section>
     </div>
 </header>
@@ -195,8 +252,10 @@ use yii\helpers\Html;
                             <div class="mdc-form-field" style="color: white">
                                 <div class="mdc-checkbox">
                                     <input type="checkbox"
+                                    name="select[]"
+                                    value="<?php echo $value["image_id"]?>" 
                                            class="mdc-checkbox__native-control"
-                                           id="checkbox-1" style="color: white" />
+                                           id="checkbox-1" onclick="toggleMenu()" />
                                     <div class="mdc-checkbox__background">
                                         <svg class="mdc-checkbox__checkmark"
                                              viewBox="0 0 24 24">
@@ -206,6 +265,15 @@ use yii\helpers\Html;
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="bottom-left">
+                                <?php 
+                                    if ($value['wistlist'] == 1) {
+                                ?>
+                                    <i name="name" class="material-icons mdc-icon-button__icon">star_rate</i>
+                                <?php
+                                    }
+                                ?>
                         </div>
                     </div>
                 </a>
@@ -244,5 +312,17 @@ use yii\helpers\Html;
     const checkbox = new MDCCheckbox(document.querySelector('.mdc-checkbox'));
     const formField = new MDCFormField(document.querySelector('.mdc-form-field'));
     formField.input = checkbox;
+
+//munu checkbox checked
+    function toggleMenu() {
+        var checkBox = document.getElementById("checkbox-1");
+        var menuBox = document.getElementById('menu-box');    
+        if(checkBox.checked == true) { // if is menuBox displayed, hide it
+            menuBox.style.display = "block";
+        }
+        else { // if is menuBox hidden, display it
+            menuBox.style.display = "none";
+        }
+    }
 </script>
 </body>

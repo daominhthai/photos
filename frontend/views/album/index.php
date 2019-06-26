@@ -153,14 +153,15 @@ use yii\helpers\Html;
         foreach ($albums as $key =>$value) {
             ?>
             <div class="column " style="padding: 5px">
-                <a href="<?php echo Yii::$app->homeUrl.'album/wistlist'?>" style="text-decoration: none;color: black;">
+                <a href="<?php echo Yii::$app->homeUrl.'album/addnew' ?>" style="text-decoration: none;color: black;">
                     <div class="container">
-                        <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/5aeb1f62f6cd496dc81c07d58b82f143.jpg"?>" class="image">
+                        <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/5aeb1f62f6cd496dc81c07d58b82f143.jpg"?>"
+                             class="image">
                         <div class="overlay">
                             <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionAlbum()">more_vert</a>
                         </div>
                     </div>
-                    <span class="mdc-typography--subtitle2"><b><?php echo $value["title"];?></b></span>
+<!--                    <span class="mdc-typography--subtitle2"><b>--><?php //echo $value["title"];?><!--</b></span>-->
                 </a>
                 
             </div>

@@ -2,6 +2,7 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use app\widgets\headerdetailWidget;
 
@@ -85,6 +86,7 @@ use app\widgets\headerdetailWidget;
             width: 100%;
             height: auto;
         }
+
         .container:hover .overlay {
             opacity: 1;
         }
@@ -101,14 +103,13 @@ use app\widgets\headerdetailWidget;
             height: 100%;
             width: 0;
             position: fixed;
-            z-index: 1;
+            z-index: 100;
             top: 0;
             left: 0;
             background-color: black;
             background-color: #FFFFFF;
             overflow-x: hidden;
             transition: 0.5s;
-            z-index: 10000;
 
         }
 
@@ -116,6 +117,7 @@ use app\widgets\headerdetailWidget;
             position: relative;
             top: 15%;
             width: 100%;
+            text-align: center;
         }
 
         .overlay a {
@@ -126,20 +128,7 @@ use app\widgets\headerdetailWidget;
             display: block;
             transition: 0.3s;
         }
-    .overlay1 {
-        position: absolute;
-        top: 0;
-        background: rgb(0, 0, 0);
-        background: rgba(0, 0, 0, 0.2);
-        color: #f1f1f1;
-        width: 100%;
-        transition: .5s ease;
-        opacity:0;
-        color: white;
-        font-size: 20px;
-        padding: 1%;
-        text-align: left;
-    }
+
         .overlay a:hover, .overlay a:focus {
             color: black;
         }
@@ -148,17 +137,36 @@ use app\widgets\headerdetailWidget;
             position: absolute;
             top: 20px;
             right: 45px;
-            font-size: 40px;
+            font-size: 60px;
         }
 
         @media screen and (max-height: 450px) {
-            .overlay a {font-size: 20px}
+            .overlay a {
+                font-size: 20px
+            }
+
             .overlay .closebtn {
                 font-size: 40px;
                 top: 15px;
                 right: 35px;
             }
         }
+
+        .overlay1 {
+            position: absolute;
+            top: 0;
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.2);
+            color: #f1f1f1;
+            width: 100%;
+            transition: .5s ease;
+            opacity: 0;
+            color: white;
+            font-size: 20px;
+            padding: 1%;
+            text-align: left;
+        }
+
         .container:hover .overlay1 {
             opacity: 1;
         }
@@ -166,17 +174,32 @@ use app\widgets\headerdetailWidget;
 </head>
 <body>
 <?php $this->beginBody() ?>
-
+<?php $form = ActiveForm::begin(['action' => 'add']) ?>
 <header class="mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
     <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <a href="<?= Yii::$app->homeUrl ?>" class="demo-menu material-icons mdc-top-app-bar__navigation-icon">keyboard_backspace</a>
+            <a href="<?= Yii::$app->homeUrl . 'album' ?>"
+               class="demo-menu material-icons mdc-top-app-bar__navigation-icon">keyboard_backspace</a>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-content">
 
 
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+
+<!--            <input type="hidden" name="albumid" value="--><?php //echo $albums['album_id'] ?><!--">-->
+
+            <button id="add-to-favorites wist"
+                    type="submit"
+                    name="submit"
+                    class="mdc-icon-button wist"
+                    aria-label="Add to favorites"
+                    aria-hidden="true"
+                    aria-pressed="false">
+                <i name="name" class="material-icons mdc-icon-button__icon">add</i>
+            </button>
+
+            <!--            <a class="material-icons mdc-top-app-bar__action-item" aria-label="ReDelete">add</a>-->
             <a class="material-icons mdc-top-app-bar__action-item" aria-label="ReDelete">share</a>
             <a class="material-icons mdc-top-app-bar__action-item" aria-label="ReDelete">more_vert</a>
         </section>
@@ -187,61 +210,98 @@ use app\widgets\headerdetailWidget;
     <div class="mdc-text-field mdc-text-field--fullwidth" style="margin-top: 30px">
         <input class="mdc-text-field__input"
                type="text"
+               name="tieude"
                placeholder="Thêm Tiêu Đề"
                aria-label="Thêm Tiêu Đề">
     </div>
     <!--    end input them tieu de-->
-    <div class="chonanh">
-        <button class="mdc-button">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-            <span onclick="openNav()" class="mdc-button__label" style="color: black">Chọn ảnh</span>
-        </button>
+    <div class="row">
+        <?php
+        foreach ($image as $key => $value) {
+            ?>
+            <div class="column " style="padding: 5px">
+                <span class="mdc-typography--subtitle2"><?php echo $value["date_create"] . " " . $value["location"]; ?></span>
+                <div class="container">
+                    <img src="<?php echo Yii::$app->homeUrl . "frontend/web/" . $value["path_image"] ?>"
+                         class="image">
+                    <div class="overlay1">
+                        <div class="mdc-form-field" style="color: white">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox"
+                                       name="checkimage[]"
+                                       value="<?php echo $value["image_id"]?>"
+                                       class="mdc-checkbox__native-control"
+                                       id="checkbox-1" style="color: white"/>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark"
+                                         viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark-path" fill="none"
+                                              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
     </div>
+    <?php ActiveForm::end() ?>
 
 </div>
 
 <!--cái sẽ hiện ra-->
-<div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="overlay-content">
-        <div class="row">
-            <?php
-            foreach ($image as $key =>$value) {
-                ?>
-                <div class="column " style="padding: 5px">
-                <span class="mdc-typography--subtitle2"><?php
-                    echo $value["date_create"]." ".$value["location"];
-                    ?></span>
-                        <div class="container">
-                            <img src="<?php echo Yii::$app->homeUrl."frontend/web/".$value["path_image"]?>" class="image">
-                            <div class="overlay1">
-                                <div class="mdc-form-field" style="color: white">
-                                    <div class="mdc-checkbox">
-                                        <input type="checkbox"
-                                               class="mdc-checkbox__native-control"
-                                               id="checkbox-1" style="color: white" />
-                                        <div class="mdc-checkbox__background">
-                                            <svg class="mdc-checkbox__checkmark"
-                                                 viewBox="0 0 24 24">
-                                                <path class="mdc-checkbox__checkmark-path" fill="none"  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                                            </svg>
-                                            <div class="mdc-checkbox__mixedmark"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-                <?php
-            }
-            ?>
-        </div>
-    </div>
-</div>
+<!--<div id="myNav" class="overlay">-->
+<!--    <div>-->
+<!--        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
+<!--    </div>-->
+<!--    <div class="overlay-content">-->
+<!--        <div class="row">-->
+<!--            --><?php
+//            foreach ($image as $key => $value) {
+//                ?>
+<!--                <div class="column " style="padding: 5px">-->
+<!--                <span class="mdc-typography--subtitle2">--><?php
+//                    echo $value["date_create"] . " " . $value["location"];
+//                    ?><!--</span>-->
+<!--                    <div class="container">-->
+<!--                        <img src="-->
+<?php //echo Yii::$app->homeUrl . "frontend/web/" . $value["path_image"] ?><!--"-->
+<!--                             class="image">-->
+<!--                        <div class="overlay1">-->
+<!--                            <div class="mdc-form-field" style="color: white">-->
+<!--                                <div class="mdc-checkbox">-->
+<!--                                    <input type="checkbox"-->
+<!--                                           class="mdc-checkbox__native-control"-->
+<!--                                           id="checkbox-1" style="color: white"/>-->
+<!--                                    <div class="mdc-checkbox__background">-->
+<!--                                        <svg class="mdc-checkbox__checkmark"-->
+<!--                                             viewBox="0 0 24 24">-->
+<!--                                            <path class="mdc-checkbox__checkmark-path" fill="none"-->
+<!--                                                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>-->
+<!--                                        </svg>-->
+<!--                                        <div class="mdc-checkbox__mixedmark"></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                --><?php
+//            }
+//            ?>
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <script>
+    const checkbox = new MDCCheckbox(document.querySelector('.mdc-checkbox'));
+    const formField = new MDCFormField(document.querySelector('.mdc-form-field'));
+    formField.input = checkbox;
+
     function openNav() {
         document.getElementById("myNav").style.width = "100%";
     }
@@ -249,10 +309,6 @@ use app\widgets\headerdetailWidget;
     function closeNav() {
         document.getElementById("myNav").style.width = "0%";
     }
-
-    const checkbox = new MDCCheckbox(document.querySelector('.mdc-checkbox'));
-    const formField = new MDCFormField(document.querySelector('.mdc-form-field'));
-    formField.input = checkbox;
 
 </script>
 
